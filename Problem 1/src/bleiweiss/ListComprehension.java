@@ -37,25 +37,6 @@ public class ListComprehension {
         s_emp.add(e21); s_emp.add(e22); s_emp.add(e23); s_emp.add(e24);
 
 
-        ArrayList<List<Object>> s_dept = new ArrayList<List<Object>>();
-        //                              0        1             2
-        //                              ID      NAME       REGION_ID
-        List<Object> d1 = Arrays.asList(10,  "Finance",        1);
-        List<Object> d2 = Arrays.asList(31,  "Sales",          1);
-        List<Object> d3 = Arrays.asList(32,  "Sales",          2);
-        List<Object> d4 = Arrays.asList(33,  "Sales",          3);
-        List<Object> d5 = Arrays.asList(34,  "Sales",          4);
-        List<Object> d6 = Arrays.asList(35,  "Sales",          5);
-        List<Object> d7 = Arrays.asList(41,  "Operations",     1);
-        List<Object> d8 = Arrays.asList(42,  "Operations",     2);
-        List<Object> d9 = Arrays.asList(43,  "Operations",     3);
-        List<Object> d10 = Arrays.asList(44, "Operations",     4);
-        List<Object> d11 = Arrays.asList(45, "Operations",     5);
-        List<Object> d12 = Arrays.asList(50, "Administration", 1);
-
-        s_dept.add(d1); s_dept.add(d2); s_dept.add(d3); s_dept.add(d4); s_dept.add(d5); s_dept.add(d6); s_dept.add(d7); s_dept.add(d8); s_dept.add(d9); s_dept.add(d10);
-        s_dept.add(d11); s_dept.add(d12);
-
         // pipeline 1
         System.out.println("Select * from s_emp");
         s_emp.stream()
@@ -72,7 +53,7 @@ public class ListComprehension {
         System.out.println("");
 
         // pipeline 3
-        System.out.print("Select * from s_emp where salary > 1500");
+        System.out.println("Select * from s_emp where salary > 1500");
         s_emp.stream()
                 .filter(e -> ((Integer)(e.get(7))) > 1500)
                 .forEach(p -> System.out.println(p));
@@ -80,7 +61,16 @@ public class ListComprehension {
         System.out.println("");
 
         // pipeline 4
-
+        System.out.println("Select last_name, first_name, tile, salary from s_emp");
+        s_emp.stream()
+                .map(e -> {
+                    String lastname = (String) e.get(1);
+                    String firstname = (String) e.get(2);
+                    String tile = (String) e.get(6);
+                    Integer salary = (Integer) e.get(7);
+                    return Arrays.asList(lastname, firstname, tile, salary);
+                })
+                .forEach(p -> System.out.println(p));
 
         System.out.println("");
 
