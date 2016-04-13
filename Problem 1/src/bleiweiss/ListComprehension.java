@@ -48,12 +48,17 @@ public class ListComprehension {
         List<Object> d10 = Arrays.asList(44, "Operations", 4);
         List<Object> d11 = Arrays.asList(45, "Operations", 5);
         List<Object> d12 = Arrays.asList(50, "Administration", 1);
-        
+
         s_dept.add(d1); s_dept.add(d2); s_dept.add(d3); s_dept.add(d4); s_dept.add(d5); s_dept.add(d6); s_dept.add(d7); s_dept.add(d8); s_dept.add(d9); s_dept.add(d10);
         s_dept.add(d11); s_dept.add(d12);
 
 
-        s_emp.stream()
-                .forEach(e -> { System.out.println(e); });
+        s_emp.stream().filter(e -> e.get(7).equals(1500)).forEach(p -> System.out.println(p));
+
+        System.out.println("");
+
+        s_emp.stream().filter(e -> ((Integer)(e.get(7))) > 1500).forEach(p -> System.out.println(p));
+
+
     }
 }
