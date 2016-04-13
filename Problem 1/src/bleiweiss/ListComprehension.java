@@ -56,13 +56,14 @@ public class ListComprehension {
         s_dept.add(d1); s_dept.add(d2); s_dept.add(d3); s_dept.add(d4); s_dept.add(d5); s_dept.add(d6); s_dept.add(d7); s_dept.add(d8); s_dept.add(d9); s_dept.add(d10);
         s_dept.add(d11); s_dept.add(d12);
 
-
+        // pipeline 1
         System.out.println("Select * from s_emp");
         s_emp.stream()
                 .forEach(p -> System.out.println(p));
 
         System.out.println("");
 
+        // pipeline 2
         System.out.println("Select * from s_emp where salary = 1500");
         s_emp.stream()
                 .filter(e -> e.get(7).equals(1500))
@@ -70,10 +71,22 @@ public class ListComprehension {
 
         System.out.println("");
 
+        // pipeline 3
         System.out.print("Select * from s_emp where salary > 1500");
         s_emp.stream()
                 .filter(e -> ((Integer)(e.get(7))) > 1500)
                 .forEach(p -> System.out.println(p));
+
+        System.out.println("");
+
+        // pipeline 4
+
+
+        System.out.println("");
+
+        // pipeline 5
+
+        
 
 
     }
