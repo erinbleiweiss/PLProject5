@@ -7,35 +7,26 @@ Data 1.0
 Data 2.0
 """
 
-tokens = ('MY', 'WORD', 'ORDINAL', 'NUMBER')
+tokens = ('MY', 'WORD', 'ORDINAL', 'NUMBER', 'PARTRIDGE', 'AND')
 literals = ['.', ':', ','  ]
 
 # Tokens
-# t_MY = r'^My.*$'
 ordinals = ['first', 'second', 'third', 'fourth',
-            'fifth', 'sixth', 'seventh', 'eighth']
+            'fifth', 'sixth', 'seventh', 'eighth',
+            'ninth', 'tenth', 'eleventh', 'twelfth']
 
-numbers = {'A' : 1,
-           'Two' : 2,
-           'Three' : 3,
-           'Four' : 4,
-           'Five' : 5,
-           'Six' : 6,
-           'Seven' : 7,
-           'Eight' : 8,
-           'Nine' : 9,
-           'Ten' : 10,
-           'Eleven' : 11,
-           'Twelve' : 12}
-
-# def t_INTEGER(t):
-#     r'\d+'
-#     try:
-#         t.value = int(t.value)
-#     except ValueError:
-#         print("Integer value too large %d", t.value)
-#         t.value = 0
-#     return t
+numbers = {'A': 1,
+           'Two': 2,
+           'Three': 3,
+           'Four': 4,
+           'Five': 5,
+           'Six': 6,
+           'Seven': 7,
+           'Eight': 8,
+           'Nine': 9,
+           'Ten': 10,
+           'Eleven': 11,
+           'Twelve': 12}
 
 
 def t_MY(t):
@@ -43,8 +34,16 @@ def t_MY(t):
     return t
 
 
+def t_PARTRIDGE(t):
+    r'partridge.*tree'
+    return t
+
+def t_AND(t):
+    r'\band\b'
+    return t
+
 def t_WORD(t):
-    r'\b\w+\b'
+    r'\b[\w-]+\b'
     if t.value in ordinals:
         t.value = t.value.capitalize()
         t.type = "ORDINAL"
@@ -76,25 +75,35 @@ global time_step
 time_step = 0
 
 def p_start(t):
-    # print(t[1])
     '''start : MY
              | WORD
              | ORDINAL
              | NUMBER
              | day
+             | partridge
              | gift
              | empty
     '''
+    # print(t[1])
 
 def p_day(t):
     'day : WORD WORD ORDINAL WORD WORD WORD ","'
     # t[0] = t[3]
-    print "{0} day: ".format(t[3])
+    print "\n{0} {1}: ".format(t[3], t[4])
+
+def p_partridge(t):
+    'partridge : NUMBER PARTRIDGE "."'
+    # t[0] = t[1]
+    print "{0} {1}".format(t[1], t[2])
 
 def p_gift(t):
-    'gift : NUMBER WORD WORD WORD WORD WORD'
+    'gift : NUMBER WORD WORD'
     # t[0] = t[2]
-    print "{0} {1}".format(t[1], t[2])
+    print "{0} {1} {2}".format(t[1], t[2], t[3])
+
+def p_gift_and(t):
+    'gift : NUMBER WORD WORD AND'
+    print "{0} {1} {2}".format(t[1], t[2], t[3])
 
 def p_empty(t):
     'empty : '
