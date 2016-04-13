@@ -7,20 +7,31 @@ Data 1.0
 Data 2.0
 """
 
-tokens = ('ON_THE', 'INTEGER')
+tokens = ('ON', 'DAY', 'ORDINAL')
 literals = ['.', ':'  ]
 
 # Tokens
-t_ON_THE  = r'^On the.*$'
+t_ON  = r'^On\sthe'
+t_DAY = r'day\sof\sChristmas\s'
 
-def t_INTEGER(t):
-    r'\d+'
-    try:
-        t.value = int(t.value)
-    except ValueError:
-        print("Integer value too large %d", t.value)
-        t.value = 0
-    return t
+# def t_INTEGER(t):
+#     r'\d+'
+#     try:
+#         t.value = int(t.value)
+#     except ValueError:
+#         print("Integer value too large %d", t.value)
+#         t.value = 0
+#     return t
+
+
+def t_ORDINAL(t):
+    r'\w*\s'
+    ordinals = ['first', 'second', 'third', 'fourth',
+                'fifth', 'sixth', 'seventh', 'eighth']
+    if t.value[:-1] in ordinals:
+        return t
+    else:
+        return ""
 
 # Ignored characters
 t_ignore = " \r"
@@ -43,16 +54,21 @@ global time_step
 time_step = 0
 
 def p_start(t):
-    '''start : HEADER1
-             | HEADER2
-             | DATA float
+    '''start : ON
+             | DAY
+             | ORDINAL
+             | day
+             | empty
     '''
-    if len(t) > 2: #This matches the third line in the parser rule, i.e., | DATA float
-        print "Saw a ", t[0], ", ", t[1], ", ", t[2], "_~_"
+    print(t[1])
 
-def p_float(t):
-    'float : INTEGER "." INTEGER'
-    t[0] =  str(t[1]) + str(t[2]) + str(t[3])
+def p_day(t):
+    'day : ON ORDINAL DAY'
+    t[0] = t[2]
+
+def p_empty(t):
+    'empty : '
+    pass
 
 def p_error(t):
     if t == None:

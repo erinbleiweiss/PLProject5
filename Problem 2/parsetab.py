@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ECD88615902865D89A5FBA42406F93CF'
+_lr_signature = '560DF84AF19A5F3BC4AF726F2A1FD560'
     
-_lr_action_items = {'ALL':([2,23,],[10,-6,]),'AMPM':([21,],[23,]),'.':([13,],[16,]),'LINUX':([0,],[4,]),'INTEGER':([0,2,9,12,14,16,17,18,19,20,22,23,24,25,26,27,],[5,9,13,15,13,19,13,21,-10,13,13,-6,13,13,13,13,]),':':([5,15,],[12,18,]),'CPU':([2,23,],[11,-6,]),'$end':([0,1,3,4,6,7,8,10,11,19,28,],[-11,-3,0,-1,-5,-2,-4,-8,-7,-10,-9,]),}
+_lr_action_items = {'ORDINAL':([0,2,],[1,7,]),'ON':([0,],[2,]),'DAY':([0,7,],[5,8,]),'$end':([0,1,2,3,4,5,6,8,],[-7,-3,-1,-4,0,-2,-5,-6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'all':([0,],[1,]),'float':([9,14,17,20,22,24,25,26,27,],[14,17,20,22,24,25,26,27,28,]),'start':([0,],[3,]),'time':([0,],[2,]),'data':([0,],[6,]),'cpu':([0,],[7,]),'empty':([0,],[8,]),}
+_lr_goto_items = {'start':([0,],[4,]),'day':([0,],[3,]),'empty':([0,],[6,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,15 +26,11 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> LINUX','start',1,'p_start','PLYmpstat.py',49),
-  ('start -> cpu','start',1,'p_start','PLYmpstat.py',50),
-  ('start -> all','start',1,'p_start','PLYmpstat.py',51),
-  ('start -> empty','start',1,'p_start','PLYmpstat.py',52),
-  ('start -> data','start',1,'p_start','PLYmpstat.py',53),
-  ('time -> INTEGER : INTEGER : INTEGER AMPM','time',6,'p_time','PLYmpstat.py',58),
-  ('cpu -> time CPU','cpu',2,'p_cpu','PLYmpstat.py',62),
-  ('all -> time ALL','all',2,'p_all','PLYmpstat.py',66),
-  ('data -> time INTEGER float float float float float float float float float','data',11,'p_data','PLYmpstat.py',70),
-  ('float -> INTEGER . INTEGER','float',3,'p_float','PLYmpstat.py',74),
-  ('empty -> <empty>','empty',0,'p_empty','PLYmpstat.py',78),
+  ('start -> ON','start',1,'p_start','PLY12days.py',57),
+  ('start -> DAY','start',1,'p_start','PLY12days.py',58),
+  ('start -> ORDINAL','start',1,'p_start','PLY12days.py',59),
+  ('start -> day','start',1,'p_start','PLY12days.py',60),
+  ('start -> empty','start',1,'p_start','PLY12days.py',61),
+  ('day -> ON ORDINAL DAY','day',3,'p_day','PLY12days.py',66),
+  ('empty -> <empty>','empty',0,'p_empty','PLY12days.py',70),
 ]
