@@ -8,14 +8,16 @@ Rule 2     start -> DAY
 Rule 3     start -> ORDINAL
 Rule 4     start -> day
 Rule 5     start -> empty
-Rule 6     day -> ON ORDINAL DAY
-Rule 7     empty -> <empty>
+Rule 6     start -> MY
+Rule 7     day -> ON ORDINAL DAY
+Rule 8     empty -> <empty>
 
 Terminals, with rules where they appear
 
-DAY                  : 2 6
-ON                   : 1 6
-ORDINAL              : 3 6
+DAY                  : 2 7
+MY                   : 6
+ON                   : 1 7
+ORDINAL              : 3 7
 error                : 
 
 Nonterminals, with rules where they appear
@@ -34,17 +36,19 @@ state 0
     (3) start -> . ORDINAL
     (4) start -> . day
     (5) start -> . empty
-    (6) day -> . ON ORDINAL DAY
-    (7) empty -> .
+    (6) start -> . MY
+    (7) day -> . ON ORDINAL DAY
+    (8) empty -> .
 
     ON              shift and go to state 2
-    DAY             shift and go to state 5
+    DAY             shift and go to state 6
     ORDINAL         shift and go to state 1
-    $end            reduce using rule 7 (empty -> .)
+    MY              shift and go to state 5
+    $end            reduce using rule 8 (empty -> .)
 
     start                          shift and go to state 4
     day                            shift and go to state 3
-    empty                          shift and go to state 6
+    empty                          shift and go to state 7
 
 state 1
 
@@ -56,10 +60,10 @@ state 1
 state 2
 
     (1) start -> ON .
-    (6) day -> ON . ORDINAL DAY
+    (7) day -> ON . ORDINAL DAY
 
     $end            reduce using rule 1 (start -> ON .)
-    ORDINAL         shift and go to state 7
+    ORDINAL         shift and go to state 8
 
 
 state 3
@@ -77,28 +81,35 @@ state 4
 
 state 5
 
+    (6) start -> MY .
+
+    $end            reduce using rule 6 (start -> MY .)
+
+
+state 6
+
     (2) start -> DAY .
 
     $end            reduce using rule 2 (start -> DAY .)
 
 
-state 6
+state 7
 
     (5) start -> empty .
 
     $end            reduce using rule 5 (start -> empty .)
 
 
-state 7
-
-    (6) day -> ON ORDINAL . DAY
-
-    DAY             shift and go to state 8
-
-
 state 8
 
-    (6) day -> ON ORDINAL DAY .
+    (7) day -> ON ORDINAL . DAY
 
-    $end            reduce using rule 6 (day -> ON ORDINAL DAY .)
+    DAY             shift and go to state 9
+
+
+state 9
+
+    (7) day -> ON ORDINAL DAY .
+
+    $end            reduce using rule 7 (day -> ON ORDINAL DAY .)
 

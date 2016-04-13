@@ -7,12 +7,13 @@ Data 1.0
 Data 2.0
 """
 
-tokens = ('ON', 'DAY', 'ORDINAL')
+tokens = ('ON', 'DAY', 'ORDINAL', 'MY')
 literals = ['.', ':'  ]
 
 # Tokens
 t_ON  = r'^On\sthe'
 t_DAY = r'day\sof\sChristmas\s'
+t_MY = r'My.*$'
 
 # def t_INTEGER(t):
 #     r'\d+'
@@ -59,6 +60,7 @@ def p_start(t):
              | ORDINAL
              | day
              | empty
+             | MY
     '''
     print(t[1])
 
