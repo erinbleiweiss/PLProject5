@@ -3,27 +3,31 @@ Created by PLY version 3.8 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> start
-Rule 1     start -> ON
-Rule 2     start -> DAY
+Rule 1     start -> MY
+Rule 2     start -> WORD
 Rule 3     start -> ORDINAL
-Rule 4     start -> day
-Rule 5     start -> empty
-Rule 6     start -> MY
-Rule 7     day -> ON ORDINAL DAY
-Rule 8     empty -> <empty>
+Rule 4     start -> NUMBER
+Rule 5     start -> day
+Rule 6     start -> gift
+Rule 7     start -> empty
+Rule 8     day -> WORD WORD ORDINAL WORD WORD WORD ,
+Rule 9     gift -> NUMBER WORD WORD WORD WORD WORD
+Rule 10    empty -> <empty>
 
 Terminals, with rules where they appear
 
-DAY                  : 2 7
-MY                   : 6
-ON                   : 1 7
-ORDINAL              : 3 7
+,                    : 8
+MY                   : 1
+NUMBER               : 4 9
+ORDINAL              : 3 8
+WORD                 : 2 8 8 8 8 8 9 9 9 9 9
 error                : 
 
 Nonterminals, with rules where they appear
 
-day                  : 4
-empty                : 5
+day                  : 5
+empty                : 7
+gift                 : 6
 start                : 0
 
 Parsing method: LALR
@@ -31,24 +35,27 @@ Parsing method: LALR
 state 0
 
     (0) S' -> . start
-    (1) start -> . ON
-    (2) start -> . DAY
+    (1) start -> . MY
+    (2) start -> . WORD
     (3) start -> . ORDINAL
-    (4) start -> . day
-    (5) start -> . empty
-    (6) start -> . MY
-    (7) day -> . ON ORDINAL DAY
-    (8) empty -> .
+    (4) start -> . NUMBER
+    (5) start -> . day
+    (6) start -> . gift
+    (7) start -> . empty
+    (8) day -> . WORD WORD ORDINAL WORD WORD WORD ,
+    (9) gift -> . NUMBER WORD WORD WORD WORD WORD
+    (10) empty -> .
 
-    ON              shift and go to state 2
-    DAY             shift and go to state 6
+    MY              shift and go to state 6
+    WORD            shift and go to state 2
     ORDINAL         shift and go to state 1
-    MY              shift and go to state 5
-    $end            reduce using rule 8 (empty -> .)
+    NUMBER          shift and go to state 4
+    $end            reduce using rule 10 (empty -> .)
 
-    start                          shift and go to state 4
-    day                            shift and go to state 3
-    empty                          shift and go to state 7
+    start                          shift and go to state 5
+    empty                          shift and go to state 8
+    day                            shift and go to state 7
+    gift                           shift and go to state 3
 
 state 1
 
@@ -59,57 +66,129 @@ state 1
 
 state 2
 
-    (1) start -> ON .
-    (7) day -> ON . ORDINAL DAY
+    (2) start -> WORD .
+    (8) day -> WORD . WORD ORDINAL WORD WORD WORD ,
 
-    $end            reduce using rule 1 (start -> ON .)
-    ORDINAL         shift and go to state 8
+    $end            reduce using rule 2 (start -> WORD .)
+    WORD            shift and go to state 9
 
 
 state 3
 
-    (4) start -> day .
+    (6) start -> gift .
 
-    $end            reduce using rule 4 (start -> day .)
+    $end            reduce using rule 6 (start -> gift .)
 
 
 state 4
+
+    (4) start -> NUMBER .
+    (9) gift -> NUMBER . WORD WORD WORD WORD WORD
+
+    $end            reduce using rule 4 (start -> NUMBER .)
+    WORD            shift and go to state 10
+
+
+state 5
 
     (0) S' -> start .
 
 
 
-state 5
-
-    (6) start -> MY .
-
-    $end            reduce using rule 6 (start -> MY .)
-
-
 state 6
 
-    (2) start -> DAY .
+    (1) start -> MY .
 
-    $end            reduce using rule 2 (start -> DAY .)
+    $end            reduce using rule 1 (start -> MY .)
 
 
 state 7
 
-    (5) start -> empty .
+    (5) start -> day .
 
-    $end            reduce using rule 5 (start -> empty .)
+    $end            reduce using rule 5 (start -> day .)
 
 
 state 8
 
-    (7) day -> ON ORDINAL . DAY
+    (7) start -> empty .
 
-    DAY             shift and go to state 9
+    $end            reduce using rule 7 (start -> empty .)
 
 
 state 9
 
-    (7) day -> ON ORDINAL DAY .
+    (8) day -> WORD WORD . ORDINAL WORD WORD WORD ,
 
-    $end            reduce using rule 7 (day -> ON ORDINAL DAY .)
+    ORDINAL         shift and go to state 11
+
+
+state 10
+
+    (9) gift -> NUMBER WORD . WORD WORD WORD WORD
+
+    WORD            shift and go to state 12
+
+
+state 11
+
+    (8) day -> WORD WORD ORDINAL . WORD WORD WORD ,
+
+    WORD            shift and go to state 13
+
+
+state 12
+
+    (9) gift -> NUMBER WORD WORD . WORD WORD WORD
+
+    WORD            shift and go to state 14
+
+
+state 13
+
+    (8) day -> WORD WORD ORDINAL WORD . WORD WORD ,
+
+    WORD            shift and go to state 15
+
+
+state 14
+
+    (9) gift -> NUMBER WORD WORD WORD . WORD WORD
+
+    WORD            shift and go to state 16
+
+
+state 15
+
+    (8) day -> WORD WORD ORDINAL WORD WORD . WORD ,
+
+    WORD            shift and go to state 17
+
+
+state 16
+
+    (9) gift -> NUMBER WORD WORD WORD WORD . WORD
+
+    WORD            shift and go to state 18
+
+
+state 17
+
+    (8) day -> WORD WORD ORDINAL WORD WORD WORD . ,
+
+    ,               shift and go to state 19
+
+
+state 18
+
+    (9) gift -> NUMBER WORD WORD WORD WORD WORD .
+
+    $end            reduce using rule 9 (gift -> NUMBER WORD WORD WORD WORD WORD .)
+
+
+state 19
+
+    (8) day -> WORD WORD ORDINAL WORD WORD WORD , .
+
+    $end            reduce using rule 8 (day -> WORD WORD ORDINAL WORD WORD WORD , .)
 

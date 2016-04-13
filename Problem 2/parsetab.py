@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '0268727BC3FACADA7E9C31A2B30BCE36'
+_lr_signature = '30AB687E977F8E7A5B33126EC2EB7BFC'
     
-_lr_action_items = {'ORDINAL':([0,2,],[1,8,]),'ON':([0,],[2,]),'MY':([0,],[5,]),'DAY':([0,8,],[6,9,]),'$end':([0,1,2,3,4,5,6,7,9,],[-8,-3,-1,-4,0,-6,-2,-5,-7,]),}
+_lr_action_items = {'ORDINAL':([0,9,],[1,11,]),'WORD':([0,2,4,10,11,12,13,14,15,16,],[2,9,10,12,13,14,15,16,17,18,]),',':([17,],[19,]),'NUMBER':([0,],[4,]),'MY':([0,],[6,]),'$end':([0,1,2,3,4,5,6,7,8,18,19,],[-10,-3,-2,-6,-4,0,-1,-5,-7,-9,-8,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'start':([0,],[4,]),'day':([0,],[3,]),'empty':([0,],[7,]),}
+_lr_goto_items = {'start':([0,],[5,]),'empty':([0,],[8,]),'day':([0,],[7,]),'gift':([0,],[3,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,12 +26,14 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> ON','start',1,'p_start','PLY12days.py',58),
-  ('start -> DAY','start',1,'p_start','PLY12days.py',59),
-  ('start -> ORDINAL','start',1,'p_start','PLY12days.py',60),
-  ('start -> day','start',1,'p_start','PLY12days.py',61),
-  ('start -> empty','start',1,'p_start','PLY12days.py',62),
-  ('start -> MY','start',1,'p_start','PLY12days.py',63),
-  ('day -> ON ORDINAL DAY','day',3,'p_day','PLY12days.py',68),
-  ('empty -> <empty>','empty',0,'p_empty','PLY12days.py',72),
+  ('start -> MY','start',1,'p_start','PLY12days.py',85),
+  ('start -> WORD','start',1,'p_start','PLY12days.py',86),
+  ('start -> ORDINAL','start',1,'p_start','PLY12days.py',87),
+  ('start -> NUMBER','start',1,'p_start','PLY12days.py',88),
+  ('start -> day','start',1,'p_start','PLY12days.py',89),
+  ('start -> gift','start',1,'p_start','PLY12days.py',90),
+  ('start -> empty','start',1,'p_start','PLY12days.py',91),
+  ('day -> WORD WORD ORDINAL WORD WORD WORD ,','day',7,'p_day','PLY12days.py',96),
+  ('gift -> NUMBER WORD WORD WORD WORD WORD','gift',6,'p_gift','PLY12days.py',101),
+  ('empty -> <empty>','empty',0,'p_empty','PLY12days.py',106),
 ]

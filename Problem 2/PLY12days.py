@@ -7,13 +7,26 @@ Data 1.0
 Data 2.0
 """
 
-tokens = ('ON', 'DAY', 'ORDINAL', 'MY')
-literals = ['.', ':'  ]
+tokens = ('MY', 'WORD', 'ORDINAL', 'NUMBER')
+literals = ['.', ':', ','  ]
 
 # Tokens
-t_ON  = r'^On\sthe'
-t_DAY = r'day\sof\sChristmas\s'
-t_MY = r'My.*$'
+# t_MY = r'^My.*$'
+ordinals = ['first', 'second', 'third', 'fourth',
+            'fifth', 'sixth', 'seventh', 'eighth']
+
+numbers = {'A' : 1,
+           'Two' : 2,
+           'Three' : 3,
+           'Four' : 4,
+           'Five' : 5,
+           'Six' : 6,
+           'Seven' : 7,
+           'Eight' : 8,
+           'Nine' : 9,
+           'Ten' : 10,
+           'Eleven' : 11,
+           'Twelve' : 12}
 
 # def t_INTEGER(t):
 #     r'\d+'
@@ -25,17 +38,25 @@ t_MY = r'My.*$'
 #     return t
 
 
-def t_ORDINAL(t):
-    r'\w*\s'
-    ordinals = ['first', 'second', 'third', 'fourth',
-                'fifth', 'sixth', 'seventh', 'eighth']
-    if t.value[:-1] in ordinals:
-        return t
-    else:
-        return ""
+def t_MY(t):
+    r'^My.*$'
+    return t
+
+
+def t_WORD(t):
+    r'\b\w+\b'
+    if t.value in ordinals:
+        t.value = t.value.capitalize()
+        t.type = "ORDINAL"
+    elif t.value in numbers:
+        t.value = numbers[t.value]
+        t.type = "NUMBER"
+    return t
+
 
 # Ignored characters
 t_ignore = " \r"
+
 
 def t_newline(t):
     r'\n+'
@@ -55,18 +76,25 @@ global time_step
 time_step = 0
 
 def p_start(t):
-    '''start : ON
-             | DAY
+    # print(t[1])
+    '''start : MY
+             | WORD
              | ORDINAL
+             | NUMBER
              | day
+             | gift
              | empty
-             | MY
     '''
-    print(t[1])
 
 def p_day(t):
-    'day : ON ORDINAL DAY'
-    t[0] = t[2]
+    'day : WORD WORD ORDINAL WORD WORD WORD ","'
+    # t[0] = t[3]
+    print "{0} day: ".format(t[3])
+
+def p_gift(t):
+    'gift : NUMBER WORD WORD WORD WORD WORD'
+    # t[0] = t[2]
+    print "{0} {1}".format(t[1], t[2])
 
 def p_empty(t):
     'empty : '
