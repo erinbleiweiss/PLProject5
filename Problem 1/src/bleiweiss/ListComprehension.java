@@ -58,17 +58,22 @@ public class ListComprehension {
 
 
         System.out.println("Select * from s_emp");
-        s_emp.stream().forEach(p -> System.out.println(p));
+        s_emp.stream()
+                .forEach(p -> System.out.println(p));
 
         System.out.println("");
 
         System.out.println("Select * from s_emp where salary = 1500");
-        s_emp.stream().filter(e -> e.get(7).equals(1500)).forEach(p -> System.out.println(p));
+        s_emp.stream()
+                .filter(e -> e.get(7).equals(1500))
+                .forEach(p -> System.out.println(p));
 
         System.out.println("");
 
         System.out.print("Select * from s_emp where salary > 1500");
-        s_emp.stream().filter(e -> ((Integer)(e.get(7))) > 1500).forEach(p -> System.out.println(p));
+        s_emp.stream()
+                .filter(e -> ((Integer)(e.get(7))) > 1500)
+                .forEach(p -> System.out.println(p));
 
 
     }
