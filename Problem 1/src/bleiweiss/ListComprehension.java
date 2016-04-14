@@ -1,6 +1,7 @@
 package bleiweiss;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ListComprehension {
     public static void main(String[] args) {
@@ -83,10 +84,23 @@ public class ListComprehension {
         System.out.println("");
 
         // pipeline 5
+        System.out.println("Select dept_id, avg(salary) from s_emp group by dept_id");
+        s_emp.stream()
+                .map(e -> {
+                    Integer dept_id = (Integer) e.get(9);
+                    Integer salary = (Integer) (e.get(7));
+                    return Arrays.asList(dept_id, salary);
+                })
+                .sorted(Comparator.comparing(s -> (Integer)(s.get(1))))
+                .collect(Collectors.groupingBy(s -> (s.get(0)), Collectors.averagingInt(s -> s.get(1))))
+                .forEach((dept_id, sal) -> {
+                    System.out.println(Arrays.asList(dept_id, sal));
+                });
 
+        System.out.println("");
 
         // pipeline 6
-        System.out.println("Select last_name, first_name, tile, salary from s_emp where salary > 1500 order by title order by last name");
+        System.out.println("Select last_name, first_name, tile, salary from s_emp where salary > 1500 order by title, last name");
         s_emp.stream()
                 .map(e -> {
                     String lastname = (String) e.get(1);
