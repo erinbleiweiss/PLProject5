@@ -84,7 +84,21 @@ public class ListComprehension {
 
         // pipeline 5
 
-        
+
+        // pipeline 6
+        System.out.println("Select last_name, first_name, tile, salary from s_emp where salary > 1500 order by title order by last name");
+        s_emp.stream()
+                .map(e -> {
+                    String lastname = (String) e.get(1);
+                    String firstname = (String) e.get(2);
+                    String tile = (String) e.get(6);
+                    Integer salary = (Integer) e.get(7);
+                    return Arrays.asList(lastname, firstname, tile, salary);
+                })
+                .filter(e -> ((Integer)(e.get(3))) > 1500)
+                .sorted(Comparator.comparing(s -> ((String)(s.get(0)))))
+                .sorted(Comparator.comparing(s -> ((String)(s.get(2)))))
+                .forEach(p -> System.out.println(p));
 
 
     }
