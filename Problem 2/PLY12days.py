@@ -6,6 +6,20 @@ Header2 and that
 Data 1.0
 Data 2.0
 """
+qty = {
+    'partridge in a pear tree': 0,
+    'turtle': 0,
+    'french': 0,
+    'calling': 0,
+    'golden': 0,
+    'geese': 0,
+    'swans': 0,
+    'maids': 0,
+    'ladies': 0,
+    'lords': 0,
+    'pipers': 0,
+    'drummers': 0
+}
 
 tokens = ('MY', 'WORD', 'ORDINAL', 'NUMBER', 'PARTRIDGE', 'AND')
 literals = ['.', ':', ','  ]
@@ -70,9 +84,13 @@ import ply.lex as lex   # ply.lex comes from the ply folder in the PLY download.
 lexer = lex.lex()
 
 # Parsing rules
+def get_total():
+    count = 0
+    for gift in qty:
+        count += qty[gift]
+    return count
 
-global time_step
-time_step = 0
+print("Cumulative Twelve Days of Christmas Gifts")
 
 def p_start(t):
     '''start : MY
@@ -84,26 +102,35 @@ def p_start(t):
              | gift
              | empty
     '''
-    # print(t[1])
+
 
 def p_day(t):
     'day : WORD WORD ORDINAL WORD WORD WORD ","'
-    # t[0] = t[3]
     print "\n{0} {1}: ".format(t[3], t[4])
 
 def p_partridge(t):
     'partridge : NUMBER PARTRIDGE "."'
-    # t[0] = t[1]
-    print "{0} {1}".format(t[1], t[2])
+    number = t[1]
+    qty[t[2]] += number
+    number = qty[t[2]]
+    if number > 1:
+        t[2] = 'partridges in a pear tree'
+    print "{0} {1}".format(number, t[2])
+    print "Total gifts: {0}".format(get_total())
 
 def p_gift(t):
     'gift : NUMBER WORD WORD'
-    # t[0] = t[2]
-    print "{0} {1} {2}".format(t[1], t[2], t[3])
+    number = t[1]
+    qty[t[2]] += number
+    number = qty[t[2]]
+    print "{0} {1} {2}".format(number, t[2], t[3])
 
 def p_gift_and(t):
     'gift : NUMBER WORD WORD AND'
-    print "{0} {1} {2}".format(t[1], t[2], t[3])
+    number = t[1]
+    qty[t[2]] += number
+    number = qty[t[2]]
+    print "{0} {1} {2}".format(number, t[2], t[3])
 
 def p_empty(t):
     'empty : '
