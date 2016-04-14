@@ -28,16 +28,6 @@ ordinals = ['first', 'second', 'third', 'fourth',
             'fifth', 'sixth', 'seventh', 'eighth',
             'ninth', 'tenth', 'eleventh', 'twelfth']
 
-
-
-
-
-
-
-
-
-
-
 numbers = {'A': 1,
            'Two': 2,
            'Three': 3,
