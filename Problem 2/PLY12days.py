@@ -28,6 +28,16 @@ ordinals = ['first', 'second', 'third', 'fourth',
             'fifth', 'sixth', 'seventh', 'eighth',
             'ninth', 'tenth', 'eleventh', 'twelfth']
 
+
+
+
+
+
+
+
+
+
+
 numbers = {'A': 1,
            'Two': 2,
            'Three': 3,
@@ -113,7 +123,7 @@ def p_partridge(t):
     qty[t[2]] += number
     number = qty[t[2]]
     if number > 1:
-        t[2] = 'partridges in a pear tree'
+        t[2] = 'partridges in pear trees'
     print "{0} {1}".format(number, t[2])
     print "Total gifts: {0}".format(get_total())
 
