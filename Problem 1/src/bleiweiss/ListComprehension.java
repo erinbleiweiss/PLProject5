@@ -36,6 +36,14 @@ public class ListComprehension {
         s_emp.add(e11); s_emp.add(e12); s_emp.add(e13); s_emp.add(e14); s_emp.add(e15); s_emp.add(e16); s_emp.add(e17); s_emp.add(e18); s_emp.add(e19); s_emp.add(e20);
         s_emp.add(e21); s_emp.add(e22); s_emp.add(e23); s_emp.add(e24);
 
+        /*
+        .forEach()
+        .filter()
+        .map()
+        
+         */
+
+
 
         // pipeline 1
         System.out.println("Select * from s_emp");
