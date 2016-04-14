@@ -1,11 +1,4 @@
-""" This will parse the data from the unix command echo "Header1 is this~Header2 and that~~Data 1.0~Data 2.0" | tr "~" "\n"
-which is:
-Header1 is this
-Header2 and that
 
-Data 1.0
-Data 2.0
-"""
 qty = {
     'partridge in a pear tree': 0,
     'turtle': 0,
@@ -152,4 +145,3 @@ while True:
         break
     parser.parse(s)
 
-# To run the parser do the following in a terminal window: echo "Header1 is this~Header2 and that~~Data 1.0~Data 2.0" | tr "~" "\n" | grep -v '^\s*$' | python PLYstarter.py | sed "s/_~_/ which is a float./"
