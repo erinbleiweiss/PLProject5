@@ -40,9 +40,8 @@ public class ListComprehension {
         .forEach()
         .filter()
         .map()
-        
+        .sorted()
          */
-
 
 
         // pipeline 1
@@ -61,9 +60,10 @@ public class ListComprehension {
         System.out.println("");
 
         // pipeline 3
-        System.out.println("Select * from s_emp where salary > 1500");
+        System.out.println("Select * from s_emp where salary > 1500 order by salary");
         s_emp.stream()
                 .filter(e -> ((Integer)(e.get(7))) > 1500)
+                .sorted(Comparator.comparing(s -> (Integer)(s.get(7))))
                 .forEach(p -> System.out.println(p));
 
         System.out.println("");
