@@ -1,3 +1,9 @@
+"""
+To display ouput, run:
+
+cat 12days.out | python PLY12days.py
+"""
+
 
 qty = {
     'partridge in a pear tree': 0,
